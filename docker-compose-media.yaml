@@ -9,7 +9,6 @@ services:
         - PGID=$PGID
         - CREATE_TUN_DEVICE=true
         - OPENVPN_PROVIDER=NORDVPN
-        # - OPENVPN_CONFIG=default
         - NORDVPN_COUNTRY=US
         - NORDVPN_CATEGORY=legacy_p2p
         - NORDVPN_PROTOCOL=udp
@@ -31,8 +30,6 @@ services:
         - 9117:9117
         - 7878:7878
         - 8989:8989
-        - 8686:8686
-        - 5299:5299
     restart: always
     image: haugene/transmission-openvpn
 
@@ -44,11 +41,10 @@ services:
         - PUID=$PUID
         - PGID=$PGID
         - TZ=America/New_York
-        - AUTO_UPDATE=true #optional
+        - AUTO_UPDATE=true
         - RUN_OPTS=#optional
     volumes:
         - /docker/jackett:/config
-        #Jackett only needs config
     restart: unless-stopped
 
  radarr:
@@ -59,12 +55,11 @@ services:
         - PUID=$PUID
         - PGID=$PGID
         - TZ=America/New_York
-        - UMASK_SET=022 #optional
+        - UMASK_SET=022
     volumes:
         - /docker/radarr/:/config/
         - /mnt/usr/data/movies/:/data/movies/
         - /mnt/usr/data/downloads/:/data/completed/
-        #- /mnt/usr/data:/data
     restart: unless-stopped
 
  sonarr:
@@ -75,7 +70,7 @@ services:
         - PUID=$PUID
         - PGID=$PGID
         - TZ=America/New_York
-        - UMASK_SET=022 #optional
+        - UMASK_SET=022
     volumes:
         - /docker/sonarr:/config
         - /mnt/usr/data:/data
